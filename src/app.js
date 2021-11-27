@@ -1,10 +1,39 @@
 const express = require('express')
 const User = require('./config')
+const mysql = require('mysql')
 const app = express()
-
 app.use(express.json())
-
 var itr = 1;
+
+//------------------------- with mySql database--------------------------------------
+
+// const db = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'password',
+//     database: 'fans_incorporated_database'
+// })
+
+// db.connect((err)=>{
+//     if(err){
+//         throw err;
+//     }
+//     console.log("Mysql Connected...")
+// })
+
+// app.post('/v1/tasks',async(req,res)=>{
+//     let sql = `insert into tasks values(${itr++},'${(req.body.title)}',default);`
+//     db.query(sql,(err,res)=>{
+//         if(err){
+//             throw err;
+//         }
+//         console.log("Task Added...")
+//     })
+//     res.status(201).send({id : itr-1})
+// })
+
+
+//--------------------------with firebase database-------------------------------
 
 app.post("/v1/tasks",async(req,res)=>{
     req.body["id"] = itr++
@@ -68,6 +97,7 @@ app.put('/v1/tasks/:id',async(req,res)=>{
     res.status(404).send({ error : "There is no task at that id"})
 })
 
+// --------------------------------- Without any database-------------------------------
 
 //const tasks = []
 
