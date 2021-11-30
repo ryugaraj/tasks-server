@@ -23,7 +23,7 @@ var itr = 1;
 
 // app.post('/v1/tasks',async(req,res)=>{
 //     let sql = `insert into tasks values(${itr++},'${(req.body.title)}',default);`
-//     db.query(sql,(err,res)=>{
+//     await db.query(sql,(err,res)=>{
 //         if(err){
 //             throw err;
 //         }
@@ -88,8 +88,8 @@ app.put('/v1/tasks/:id',async(req,res)=>{
     for(var i=0;i<list.length;i++){
         if(_id == list[i].id){
             req.body.id = req.params.id
-            User.doc(list[i].fire_id).delete()
-            User.add(req.body)
+            await User.doc(list[i].fire_id).delete()
+            await User.add(req.body)
             return res.status(204).send()
         }
     }
